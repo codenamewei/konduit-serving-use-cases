@@ -1,0 +1,32 @@
+serving:
+  http_port: 65322
+  log_timings: True
+  extra_start_args:
+    -Xmx8g
+  output_data_format: JSON
+steps:
+  dl4j_inference_step:
+    type: DL4J
+    model_loading_path: C:\\Users\\chiaw\\AppData\\Local\\Temp\\dl4j_csv_mln.zip #C:\\Users\\chiaw\\AppData\\Local\\Temp\\dl4j_csv_mln.zip
+    input_names:
+      - default
+    input_column_names:
+      default:
+        - NDArray
+    input_schemas:
+      default:
+        - NDArray
+    output_names:
+      - default
+    output_column_names:
+      default:
+        - NDArray
+    output_schemas:
+      default:
+        - NDArray
+client:
+  port: 65322
+  output_names:
+    - default
+  input_data_format: JSON
+  output_data_format: JSON
