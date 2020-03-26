@@ -30,6 +30,7 @@ before_milli_time = current_milli_time()
 arr_input = [0.272702493273322,0.0201936700818061] #label: 0
 #arr_input = [0.867855051798607,0.597829895646543] #label: 1
 
+print("Get REST API Prediction")
 for i in iteration:
 
     prediction = client.predict({client.input_names[0]: np.array(arr_input)})
