@@ -28,3 +28,7 @@ hs_err_pid*
 *.zip
 *.h5
 .DS_Store
+
+config.json
+konduit-serving.pid
+pid.json
