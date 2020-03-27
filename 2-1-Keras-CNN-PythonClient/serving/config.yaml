@@ -7,7 +7,7 @@ serving:
 steps:
   dl4j_inference_step:
     type: KERAS
-    model_loading_path: D:\\Users\\chiawei\\Documents\\data\\keras_cnn_model.h5 #C:\\Users\\chiaw\\AppData\\Local\\Temp\\dl4j_csv_mln.zip
+    model_loading_path: C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\2-1-Keras-CNN-PythonClient\\keras_cnn_model.h5
     input_names:
       - default
     input_column_names:
