@@ -1,6 +1,5 @@
 package ai.codenamewei;
 
-import org.datavec.api.writable.NDArrayWritable;
 import org.deeplearning4j.iterator.BertIterator;
 import org.deeplearning4j.iterator.provider.FileLabeledSentenceProvider;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.BertWordPieceTokenizerFactory;
@@ -62,13 +61,12 @@ public class app
             File featureFile = new File("feature.npy");
             File featureMaskFile = new File("featureMask.npy");
 
-            Nd4j.saveBinary(feature, featureFile);
-            Nd4j.saveBinary(featureMask, featureMaskFile);
+            Nd4j.writeAsNumpy(feature, featureFile);
+            Nd4j.writeAsNumpy(featureMask, featureMaskFile);
 
-            INDArray featureRecovered = Nd4j.readBinary(featureFile);
-            INDArray featureMaskRecovered = Nd4j.readBinary(featureMaskFile);
+            INDArray featureRecovered = Nd4j.createFromNpyFile(featureFile);
+            INDArray featureMaskRecovered = Nd4j.createFromNpyFile(featureMaskFile);
 
         }
-
     }
 }
