@@ -1,0 +1,18 @@
+serving:
+  http_port: 65322
+  output_data_format: JSON
+  log_timings: True
+  extra_start_args: -Xmx8g
+steps:
+  python_step:
+    type: PYTHON
+    python_code_path: mnist-deployment.py
+    python_inputs:
+      imagePath: STR
+    python_outputs:
+      output: STR
+      output_class: STR
+    python_path: C:\\ProgramData\\Miniconda3;C:\\ProgramData\\Miniconda3\\pkgs;C:\\ProgramData\\Miniconda3\\DLLs;C:\\ProgramData\\Miniconda3\\Lib;C:\\ProgramData\\Miniconda3\\Scripts;C:\\ProgramData\\Miniconda3\\Lib\\site-packages;C:\\ProgramData\\Miniconda3\\Scripts\\conda\\lib\\site-packages\\win32;C:\\ProgramData\\Miniconda3\\Lib\\site-packages\\win32\\lib;C:\\ProgramData\\Miniconda3\\Lib\\site-packages\\pythonwin;C:\\ProgramData\\Miniconda3\\Lib\\site-packages\\IPython\\extensions
+client:
+    port: 65322
+    output_data_format: JSON
