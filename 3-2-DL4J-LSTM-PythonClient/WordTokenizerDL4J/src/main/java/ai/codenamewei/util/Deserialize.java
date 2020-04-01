@@ -10,23 +10,28 @@ import java.util.Map;
 
 public class Deserialize
 {
-    public Map<String, String> deserialize(String filePath)
+    public Map<Integer, String> deserialize(String filePath)
     {
-        Map<String, String> labelClass = new HashMap<>();
+        Map<String, String> labelClassBuffer = new HashMap<>();
         try {
             // create object mapper instance
             ObjectMapper mapper = new ObjectMapper();
 
             // convert JSON file to map
-            labelClass = mapper.readValue(new File(filePath), Map.class);
+            labelClassBuffer = mapper.readValue(new File(filePath), Map.class);
 
-            System.out.println("Deserialization: " + labelClass);
+            //System.out.println("Deserialization: " + labelClassBuffer);
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
+        Map<Integer, String> classLabel = new HashMap<>();
 
-        return labelClass;
+        for (Map.Entry<String,String> entry : labelClassBuffer.entrySet())
+        {
+            classLabel.put(Integer.parseInt(entry.getValue()), entry.getKey());
+        }
+        return classLabel;
     }
 }

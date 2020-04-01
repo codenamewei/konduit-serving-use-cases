@@ -21,26 +21,43 @@ import java.util.*;
 
 public class LocalInference
 {
+    public static void writeLabelJson(String dataPath, String labelJson)
+    {
+        Map<String, String> labelClass = new HashMap<>();
+        Integer labelIndex = 0;
+
+        File fileDataPath = new File(dataPath);
+
+        File[] subFileDataPath = fileDataPath.listFiles();
+
+        for (File file : subFileDataPath)
+        {
+            if (file.isDirectory())
+            {
+                labelClass.put(file.getName(), Integer.toString(labelIndex));
+                ++labelIndex;
+            }
+        }
+
+        new Serialize().serialize(labelClass, labelJson);
+    }
+
 
     public static void main(String args[]) throws IOException
     {
         String root_path = "C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\3-2-DL4J-LSTM-PythonClient\\";
         String path = root_path + "bert-base-uncased-vocab.txt";
-        String sampleInputPath = "C:\\Users\\chiaw\\Documents\\data\\20news-bydate\\20news-bydate-test\\" + "alt.atheism\\53068";
+        String rootDataPath = "C:\\Users\\chiaw\\Documents\\data\\20news-bydate\\20news-bydate-test\\";
+        String sampleInputPath = rootDataPath + "alt.atheism\\53068";
         String sampleLabel = "default";
         String modelPath = root_path + "bert.zip";
 
         String labelJsonPath = "labelClass.json";
 
-        Map<String, String> labelClass = new HashMap<>();
-        labelClass.put(sampleLabel, "1");
-        labelClass.put("label2", "2");
+        //writeLabelJson(rootDataPath, root_path + labelJsonPath);
 
-        new Serialize().serialize(labelClass, root_path + labelJsonPath);
+        Map<Integer, String> labelClass = new Deserialize().deserialize(root_path + labelJsonPath);
 
-        Map<String, String> labelClassRecovered = new Deserialize().deserialize(root_path + labelJsonPath);
-
-        /*
         File vocabFile = new File(path);
         BertWordPieceTokenizerFactory tokenizer;
 
@@ -52,11 +69,9 @@ public class LocalInference
             throw new IllegalStateException("Vocabulary file missing");
         }
 
-
         //List<String> sentencesArr = new ArrayList<>();
         //sentencesArr.add(inputSentence);
         //LabeledSentenceProvider provider = new CollectionLabeledSentenceProvider(sentencesArr, labelsArr, new Random(123));
-
 
         Map filesByLabel = new HashMap<String, List<File>>();
 
@@ -85,9 +100,13 @@ public class LocalInference
             //Get Local Inference
             INDArray[] classes = model.output(bertIterator);
 
-            System.out.println(classes[0].toString());
+            //System.out.println(classes[0].toString());
 
-            System.out.println(Nd4j.argMax(classes[0], 1));
+            INDArray classIndex = Nd4j.argMax(classes[0], 1);
+
+            System.out.println("Output Class: " + classIndex);
+
+            System.out.println("Output Label: " + labelClass.get((int)classIndex.getDouble(0, 0)));
 
             bertIterator.reset();
 
@@ -103,6 +122,6 @@ public class LocalInference
             Nd4j.writeAsNumpy(feature, featureFile);
             Nd4j.writeAsNumpy(featureMask, featureMaskFile);
         }
-        */
+
     }
 }
