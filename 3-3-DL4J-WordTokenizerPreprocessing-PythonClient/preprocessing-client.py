@@ -10,7 +10,7 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 port = 65322
 
-client = client_from_file("inference-config.yaml")
+client = client_from_file("preprocessing-config.yaml")
 
 print('Load file for class index <> class label')
 label_path = "labelclass.pickle"
@@ -22,14 +22,14 @@ f = open (root_path + "20news-bydate-test\\alt.atheism\\53068", "r")
 
 contents = f.read()
 
-input_param = {"String": contents}
+#input_param = {"default": contents}
 
 total_count = 5
 iteration = range(total_count)
 
 before_milli_time = current_milli_time()
 
-prediction = client.predict({"default": input_param})
+prediction = client.predict({"default": contents})
 
 print(prediction)
 

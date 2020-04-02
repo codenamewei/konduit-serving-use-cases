@@ -3,14 +3,16 @@ serving:
   log_timings: True
   extra_start_args:
     -Xmx8g
-  output_data_format: JSON
+  output_data_format: NUMPY
+  log_timings: True
+  create_logging_endpoints: True
 steps:
   tokenizer_preprocessing_step:
     type: WORD_TOKENIZER
-    vocab_path: D:\\Users\\chiawei\\Documents\\data\\bert\\bert-large-uncased-vocab.txt
-    sentence_max_len: 10
+    vocab_path: C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\3-2-DL4J-LSTM-PythonClient\\bert-base-uncased-vocab.txt
+    sentence_max_len: 256
     input_names:
-      - sentence
+      - default
     input_column_names:
       default:
         - String
@@ -18,19 +20,16 @@ steps:
       default:
         - String
     output_names:
-      - feature
-      - mask
+      - default
     output_column_names:
       default:
         - NDArray
-        - NDArray
     output_schemas:
       default:
-        - NDArray
         - NDArray
 client:
   port: 65322
   output_names:
     - output
   input_data_format: JSON
-  output_data_format: JSON
+  output_data_format: NUMPY

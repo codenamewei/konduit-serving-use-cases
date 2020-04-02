@@ -3,8 +3,6 @@ package ai.codenamewei;
 import ai.codenamewei.util.Deserialize;
 import ai.codenamewei.util.Serialize;
 import org.deeplearning4j.iterator.BertIterator;
-import org.deeplearning4j.iterator.LabeledSentenceProvider;
-import org.deeplearning4j.iterator.provider.CollectionLabeledSentenceProvider;
 import org.deeplearning4j.iterator.provider.FileLabeledSentenceProvider;
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.BertWordPieceTokenizerFactory;
@@ -15,7 +13,6 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -48,7 +45,7 @@ public class LocalInference
         String root_path = "C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\3-2-DL4J-LSTM-PythonClient\\";
         String path = root_path + "bert-base-uncased-vocab.txt";
         String rootDataPath = "C:\\Users\\chiaw\\Documents\\data\\20news-bydate\\20news-bydate-test\\";
-        String sampleInputPath = rootDataPath + "alt.atheism\\53068";
+        String sampleInputPath = rootDataPath + "comp.windows.x\\67371";
         String sampleLabel = "default";
         String modelPath = root_path + "bert.zip";
 
@@ -103,6 +100,8 @@ public class LocalInference
             //System.out.println(classes[0].toString());
 
             INDArray classIndex = Nd4j.argMax(classes[0], 1);
+
+            System.out.println("Output Probabilities: " + Nd4j.max(classes[0], 1));
 
             System.out.println("Output Class: " + classIndex);
 
