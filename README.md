@@ -16,6 +16,7 @@ Konduit-Serving is provided in a jar file with all the dependencies.
  `mvn -Ppython -Ppmml -Dchip=cpu -Djavacpp.platform=windows-x86_64 -Puberjar clean install -Dmaven.test.skip=true`
 
 You can get more information of the Konduit-Serving on the readme.md of the repository.  
+
 The most crucial thing is remember to change the platform according to OS you are using  
 through the argument `javacpp.platform`.
 - **Windows**: Djavacpp.platform=windows-x86_64
@@ -38,14 +39,14 @@ The jar will consume the most file size compared to other files in the same fold
 
 Konduit-Serving provides Python CLI to ease the client running process.  
 To get Python Cli, you can install through [pip](https://pypi.org/project/konduit/)  
-Alternatively to get the latest version, run`pip install .` in the [python](https://github.com/KonduitAI/konduit-serving/tree/master/python)directory.  
+Alternatively to get the latest version, run`pip install .` in the [python](https://github.com/KonduitAI/konduit-serving/tree/master/python) directory of konduit-serving repository.
 
 ## To start a server
 To start a server with python client,  
 you have to set the path of KONDUIT_JAR_PATH in your system first.  
 
 <p align="center">
-  <img width="460" height="300" src="metadata/setJarPath.png">
+  <img width="640" height="300" src="metadata/setJarPath.PNG">
 </p>
 
 ### Start a server with python Konduit command
@@ -54,7 +55,7 @@ konduit serve --config config.yaml
 ```
 
 <p align="center">
-  <img width="460" height="300" src="metadata/setJarPath.png">
+  <img width="640" height="300" src="metadata/start-server.PNG">
 </p>
 
 ### Start a server with java command
@@ -64,13 +65,13 @@ java -d64 -cp path\to\konduit-serving-uberjar-0.1.0-SNAPSHOT-custom-windows-x86_
 Note: java command serve json file instad of yaml  
 
 ## To stop a server
-Windows: `taskkill /F /PID pid_number`
+Windows:  
+`taskkill /F /PID pid_number`
 
-<p align="center">
-  <img width="460" height="300" src="metadata/kill-server.PNG">
-</p>
+![KillServer](metadata/kill-server.PNG)
 
-Mac: `kill -9 pid_number`
+Mac:  
+`kill -9 pid_number`
 
 ## To get logs
 Enable `create_logging_endpoints: True` in yaml file.
@@ -79,7 +80,16 @@ You can view logs on http://localhost:portNumber/logs/all. Example: http://local
 
 Alternatively, you can find the main.log log file on the directory where you run client code. 
 
-## Models and Data Files
-Data and models utilized in this repository can be retrieved from [Google Drive](https://drive.google.com/drive/folders/1v094WDWZrSlPeDHdqQqAoyudsz_tNRPS?usp=sharing)
+## How to run / use this directory  
+The files are structured in a standalone use case structure.
+- To serve a model and get prediction, retrieve the models and data paths through [Google Drive](https://drive.google.com/drive/folders/1v094WDWZrSlPeDHdqQqAoyudsz_tNRPS?usp=sharing) for the very first time.
 
-For more information, visit https://serving.konduit.ai/
+- Set path in *config.yaml* and *client.py* to the corresponding file paths
+
+- Start the server either with java / python
+
+- Run python client file
+
+### For more information, visit 
+- https://serving.konduit.ai/ 
+- https://konduit.ai/
