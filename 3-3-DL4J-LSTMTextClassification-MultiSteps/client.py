@@ -6,6 +6,17 @@ from konduit.client import Client
 from konduit.load import client_from_file
 import time
 
+def get_output(response, response_time):
+
+    index = int(np.argmax(response))
+
+    print("Class: {}".format(labelhandler[index]))
+    print("Probabilities: {}\n".format(np.max(prediction)))
+
+
+    print("Average time per request: {0:.2f} ms/request".format(response_time))
+    print("Average time per request: {0:.2f} s/request".format(response_time * 0.001))
+
 current_milli_time = lambda: int(round(time.time() * 1000))
 
 port = 65322
@@ -22,25 +33,28 @@ f = open (root_path + "20news-bydate\\20news-bydate-test\\alt.atheism\\53068", "
 
 contents = f.read()
 
-input_param = {"String": contents}
 
-total_count = 5
-iteration = range(total_count)
+payload = {client.input_names[0]: contents}
+
+#-----Konduit Package ------------
 
 before_milli_time = current_milli_time()
 
-prediction = client.predict({client.input_names[0]: input_param})
-
-index = int(np.argmax(prediction))
-
-print("Class: {}".format(labelhandler[index]))
-print("Probabilities: {}\n".format(np.max(prediction)))
+prediction = client.predict(payload)
 
 after_milli_time = current_milli_time()
 
-total_time = after_milli_time - before_milli_time
-milli_average = total_time / float(total_count)
+get_output(prediction, after_milli_time - before_milli_time)
 
-print("Total time taken: {} ms".format(total_time))
-print("Average time per request: {0:.2f} ms/request".format(milli_average))
-print("Average time per request: {0:.2f} s/request".format(milli_average * 0.001))
+#-----Requests Package ------------
+before_milli_time = current_milli_time()
+
+response = requests.post("http://localhost:65322/raw/json", json = payload)
+
+after_milli_time = current_milli_time()
+
+if response.status_code == 200:
+    print('\nRaw Requests Success!\n')
+    get_output(response, after_milli_time - before_milli_time)
+elif response.status_code == 404:
+    print('RAW Request failed.')
