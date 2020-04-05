@@ -80,7 +80,7 @@ You can view logs on http://localhost:portNumber/logs/all. Example: http://local
 
 Alternatively, you can find the main.log log file on the directory where you run client code. 
 
-## How to run / use this directory  
+## How to run / use this repository  
 The files are structured in a standalone use case structure.
 - To serve a model and get prediction, retrieve the models and data paths through [Google Drive](https://drive.google.com/drive/folders/1v094WDWZrSlPeDHdqQqAoyudsz_tNRPS?usp=sharing) for the very first time.
 
