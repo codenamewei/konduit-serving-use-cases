@@ -10,15 +10,15 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 port = 65322
 
-client = client_from_file("inference-config.yaml")
+client = client_from_file("config.yaml")
+
+root_path = "C:\\Users\\chiaw\\Documents\\data\\"
 
 print('Load file for class index <> class label')
-label_path = "labelclass.pickle"
-labelhandler = open(label_path, 'rb')
+labelhandler = open(root_path + "konduit-serving-use-cases\\3-3-DL4J-LSTMTextClassification-MultiSteps\\labelclass.pickle", 'rb')
 labelhandler = pickle.load(labelhandler)
 
-root_path = "C:\\Users\\chiaw\\Documents\\data\\20news-bydate\\"
-f = open (root_path + "20news-bydate-test\\alt.atheism\\53068", "r")
+f = open (root_path + "20news-bydate\\20news-bydate-test\\alt.atheism\\53068", "r")
 
 contents = f.read()
 
@@ -29,9 +29,12 @@ iteration = range(total_count)
 
 before_milli_time = current_milli_time()
 
-prediction = client.predict({"default": input_param})
+prediction = client.predict({client.input_names[0]: input_param})
 
-print(prediction)
+index = int(np.argmax(prediction))
+
+print("Class: {}".format(labelhandler[index]))
+print("Probabilities: {}\n".format(np.max(prediction)))
 
 after_milli_time = current_milli_time()
 

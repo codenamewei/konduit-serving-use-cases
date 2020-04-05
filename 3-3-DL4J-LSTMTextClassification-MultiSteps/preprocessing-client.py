@@ -10,11 +10,12 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 port = 65322
 
+root_path = "C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\3-3-DL4J-LSTMTextClassification-MultiSteps\\"
 client = client_from_file("preprocessing-config.yaml")
 
 print('Load file for class index <> class label')
 label_path = "labelclass.pickle"
-labelhandler = open(label_path, 'rb')
+labelhandler = open(root_path + label_path, 'rb')
 labelhandler = pickle.load(labelhandler)
 
 root_path = "C:\\Users\\chiaw\\Documents\\data\\20news-bydate\\"
@@ -22,14 +23,12 @@ f = open (root_path + "20news-bydate-test\\alt.atheism\\53068", "r")
 
 contents = f.read()
 
-#input_param = {"default": contents}
-
 total_count = 5
 iteration = range(total_count)
 
 before_milli_time = current_milli_time()
 
-prediction = client.predict({"default": contents})
+prediction = client.predict({client.input_names[0]: contents})
 
 print(prediction)
 

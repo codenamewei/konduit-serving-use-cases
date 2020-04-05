@@ -18,7 +18,8 @@ from PIL import Image
 from konduit.client import Client
 from konduit.load import client_from_file
 
-im = Image.open('image\\mnist-test.png').convert('L')# to gray image .convert('LA')
+root_path = "C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\2-1-Keras-CNN-PythonClient\\"
+im = Image.open(root_path + 'image\\mnist-test2.png').convert('L')# to gray image .convert('LA')
 
 #channels_first -> [batch_size, 1, img_rows, img_cols]
 im = np.array(im.resize((28, 28)))
@@ -32,6 +33,7 @@ files = {client.input_names[0]: im}
 
 prediction = client.predict(files)
 
-print(prediction)
+print("Class: {}".format(np.argmax(prediction, 1)[0]))
+print("Probabilities {:0.1f}".format(np.max(prediction, 1)[0]))
 
 print('Program end...')

@@ -3,9 +3,10 @@ from keras import backend as K
 from keras.models import load_model
 from keras.preprocessing.image import img_to_array, load_img
 
-model = load_model('C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\2-1-Keras-CNN-PythonClient\\keras_cnn_model.h5')
+root_path = "C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\2-1-Keras-CNN-PythonClient\\"
+model = load_model(root_path + 'keras_cnn_model.h5')
 
-imagePath = 'C:\\Users\\chiaw\\Documents\\konduit\\codenamewei\\konduit-serving-use-cases\\2-1-Keras-CNN-PythonClient\\serving\\image\\mnist-test1.png'
+#imagePath = root_path + 'image\\mnist-test1.png'
 img = load_img(imagePath, False,'grayscale',target_size=(28,28))
 
 x = img_to_array(img)

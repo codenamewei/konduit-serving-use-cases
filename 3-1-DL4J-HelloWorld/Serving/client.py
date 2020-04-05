@@ -20,7 +20,7 @@ from konduit.load import client_from_file
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
-client = client_from_file("graph_config.yaml")
+client = client_from_file("single_step_config.yaml")
 
 total_count = 5
 iteration = range(total_count)
@@ -35,11 +35,13 @@ for i in iteration:
 
     prediction = client.predict({client.input_names[0]: np.array(arr_input)})
 
-    print(prediction)
+    index = int(np.argmax(prediction))
+    probabilities = np.max(prediction)
 
-    #output = np.array(prediction[client.output_names[0]]["ndArray"]["data"])
+    print("Output: {}".format(prediction))
+    print("Class Index: {}".format(index))
+    print("Probabilities {:0.1f}".format(probabilities))
 
-    #index = int(np.argmax(output, 0))
 
 after_milli_time = current_milli_time()
 
