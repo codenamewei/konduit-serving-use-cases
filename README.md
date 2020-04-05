@@ -2,11 +2,57 @@
 
 Deployment of ML models with [Konduit-Serving](https://github.com/KonduitAI/konduit-serving)
 
+Models are served and run in a server-client architecture model,  
+where the models are deployed on the server.
+Inference can be called via REST endpoints with Python / Java. 
+
+<p align=“center”>
+<img width=“700" height=“500” src=“metadata/clientserver.png”>
+</p>
+                
+## Konduit-Serving Server Jar
+Konduit-Serving is provided in a jar file with all the dependencies.  
+- To build the jar files, download / clone the repository from https://github.com/KonduitAI/konduit-serving  
+- Go to the root directory through terminal /command prompt 
+- Run command  
+ `mvn -Ppython -Ppmml -Dchip=cpu -Djavacpp.platform=windows-x86_64 -Puberjar clean install -Dmaven.test.skip=true`
+
+You can get more information of the Konduit-Serving on the readme.md of the repository.  
+The most crucial thing is remember to change the platform according to OS you are using  
+through the argument `javacpp.platform`.
+- **Windows**: Djavacpp.platform=windows-x86_64
+- **Linux**: Djavacpp.platform=linux-x86_64
+- **Mac**: Djavacpp.platform=macosx-x86_64
+
+Below image shows a successful build of jar file. 
+
+You will get the jar file in the subdirectory path of .m2 folder.
+![ClientServer](metadata//jarlocation.png)
+
+The jar will consume the most file size compared to other files in the same folder.  
+
+## Python Command Line Interface  
+
+Konduit-Serving provides Python CLI to ease the client running process.  
+To get Python Cli, you can install through .
+Alternatively to get the latest version, go to the directory ?? and run pip install .
+
+
 Trained models and necessary content can be retrieved from [Google Drive](https://drive.google.com/drive/folders/1v094WDWZrSlPeDHdqQqAoyudsz_tNRPS?usp=sharing)
 
-To start a server
+## To start a server
+To start a server with python client,  
+you have to set the path of KONDUIT_JAR_PATH in your system first.  
+
+
 konduit serve --config config.yaml
 java -jar
 
-To stop a server
+## To stop a server
 taskkill /F /PID pid_number
+
+## To get logs
+
+
+
+For more information, visit oss.
