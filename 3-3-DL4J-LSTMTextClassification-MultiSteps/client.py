@@ -6,7 +6,7 @@ from konduit.client import Client
 from konduit.load import client_from_file
 import time
 
-def get_output(response, response_time):
+def get_output(labelhandler, response, response_time):
 
     index = int(np.argmax(response))
 
@@ -44,7 +44,7 @@ prediction = client.predict(payload)
 
 after_milli_time = current_milli_time()
 
-get_output(prediction, after_milli_time - before_milli_time)
+get_output(labelhandler, prediction, after_milli_time - before_milli_time)
 
 #-----Requests Package ------------
 before_milli_time = current_milli_time()
@@ -55,6 +55,6 @@ after_milli_time = current_milli_time()
 
 if response.status_code == 200:
     print('\nRaw Requests Success!\n')
-    get_output(response, after_milli_time - before_milli_time)
+    get_output(labelhandler, response, after_milli_time - before_milli_time)
 elif response.status_code == 404:
     print('RAW Request failed.')
