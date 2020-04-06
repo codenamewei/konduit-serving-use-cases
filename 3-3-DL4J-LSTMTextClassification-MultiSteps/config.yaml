@@ -7,7 +7,7 @@ serving:
   create_logging_endpoints: True
 steps:
   tokenizer_preprocessing_step:
-    type: WORD_TOKENIZER
+    type: WORDPIECE_TOKENIZER
     vocab_path: C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\3-3-DL4J-LSTMTextClassification-MultiSteps\\bert-base-uncased-vocab.txt
     sentence_max_len: 256
     input_names:
