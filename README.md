@@ -36,7 +36,7 @@ You will see the jar file in the subdirectory path of .m2 folder.
 The jar will consume the most file size compared to other files in the same folder.  
 
 ## Create Conda Environment
-conda env create -f config-cpu.yml
+conda env create -f config-cpu.yml  
 conda activate konduit-test-env
 
 ## Python Command Line Interface  
