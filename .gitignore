@@ -30,11 +30,11 @@ hs_err_pid*
 .DS_Store
 
 # Configuration file that's created from yaml automatically
-config.json 
+config.json
 # pid files that's only relevant to the local environment
 konduit-serving.pid
 # same as above (this is created by the python package)
 pid.json
-# main konduit-serving log files. 
+# main konduit-serving log files.
 # Only created when "create_logging_endpoints" (yaml) or "createLoggingEndpoints" (json) is set to true.
 main.log

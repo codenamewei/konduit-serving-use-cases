@@ -1,0 +1,9 @@
+name: konduit-test-env
+channels:
+  - anaconda
+dependencies:
+  - python==3.7
+  - pip
+  - keras
+  - pillow
+  - tensorflow==1.13.1

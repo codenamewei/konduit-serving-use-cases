@@ -6,7 +6,7 @@ serving:
 steps:
   python_step:
     type: PYTHON
-    python_code_path: mnist-deployment.py
+    python_code_path: deployment.py
     python_inputs:
       imagePath: STR
     python_outputs:

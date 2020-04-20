@@ -20,7 +20,7 @@ from konduit.load import client_from_file
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
-client = client_from_file("single_step_config.yaml")
+client = client_from_file("config.yaml")
 
 total_count = 5
 iteration = range(total_count)
