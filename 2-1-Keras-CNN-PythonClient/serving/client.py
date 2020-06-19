@@ -11,21 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import json
-import time
 import numpy as np
 from PIL import Image
-from konduit.client import Client
 from konduit.load import client_from_file
 
-root_path = "C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\2-1-Keras-CNN-PythonClient\\"
-im = Image.open(root_path + 'image\\mnist-test2.png').convert('L')# to gray image .convert('LA')
+im = Image.open('5_32x32.png').convert('L')  # to gray image .convert('LA')
 
-#channels_first -> [batch_size, 1, img_rows, img_cols]
+# channels_first -> [batch_size, 1, img_rows, img_cols]
 im = np.array(im.resize((28, 28)))
 im = np.expand_dims(im, axis=0)
 im = np.expand_dims(im, axis=1)
-#print(im.shape)
+# print(im.shape)
 
 client = client_from_file("config.yaml")
 

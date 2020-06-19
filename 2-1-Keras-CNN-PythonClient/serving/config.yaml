@@ -6,9 +6,8 @@ serving:
     -Xmx8g
   output_data_format: NUMPY
 steps:
-  dl4j_inference_step:
-    type: KERAS
-    model_loading_path: C:\\Users\\chiaw\\Documents\\data\\konduit-serving-use-cases\\2-1-Keras-CNN-PythonClient\\keras_cnn_model.h5
+  - type: KERAS
+    path: keras_cnn_model.h5
     input_names:
       - default
     input_column_names:

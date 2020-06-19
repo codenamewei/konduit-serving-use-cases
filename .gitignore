@@ -38,3 +38,6 @@ pid.json
 # main konduit-serving log files.
 # Only created when "create_logging_endpoints" (yaml) or "createLoggingEndpoints" (json) is set to true.
 main.log
+
+# For ignoring idea folder
+.idea
