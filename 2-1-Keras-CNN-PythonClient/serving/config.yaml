@@ -6,6 +6,22 @@ serving:
     -Xmx8g
   output_data_format: NUMPY
 steps:
+  - type: "IMAGE"
+    dimensions_configs: {}
+    image_processing_initial_layout: "NCHW"
+    image_processing_required_layout: "NHWC"
+    image_transform_processes: {}
+    input_column_names: {}
+    input_names:
+      - "default"
+    input_schemas: {}
+    original_image_height: 0
+    original_image_width: 0
+    output_column_names: {}
+    output_names:
+      - "default"
+    output_schemas: {}
+    update_ordering_before_transform: false
   - type: KERAS
     path: keras_cnn_model.h5
     input_names:
